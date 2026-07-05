@@ -202,6 +202,9 @@ Keep the number of replaceable interfaces small:
 Do not create a plugin point until there are at least two real implementations
 or a clear research reason.
 
+Signal naming, ready/valid handshakes, packet types, reset style, and module
+boundary rules are defined in [RTL Conventions](rtl-conventions.md).
+
 ## Parameter Rules
 
 Good parameters describe capacity:

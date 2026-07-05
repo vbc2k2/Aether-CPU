@@ -16,8 +16,8 @@ The project is intentionally scoped around correctness first:
 ## Initial Documents
 
 - [Aether v0 Spec](docs/aether-v0-spec.md)
+- [RTL Conventions](docs/rtl-conventions.md)
 - [Verification Plan](docs/verification-plan.md)
-- [Build Roadmap](docs/build-roadmap.md)
 
 ## v0 Target
 
