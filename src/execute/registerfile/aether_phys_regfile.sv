@@ -24,9 +24,14 @@ module aether_phys_regfile (
     );
 
     // Physical register file
-    reg [XLEN-1:0] phys_reg_q [PHYS_REGS-1:0];
+    logic [XLEN-1:0] phys_reg_q [PHYS_REGS-1:0];
 
     // combinational reads
+    // supports multiple reads at the same time
+    // reg-0 is always 0
+    // remaining reads are normal reg access {read_data_o[i] = phys_reg_q[read_addr_i[i]];}
+    // when any write address matches read address, it sends the new value to the read port
+
     always_comb begin
         for (int i = 0; i < READ_PORTS; i++) begin
             if (read_addr_i[i] == 0)
@@ -44,10 +49,13 @@ module aether_phys_regfile (
     end
 
     // synchronous writes
+    // writing to reg-0 is prohibited
+    // multiple writes to different nonzero registers are supported.
+    // writes happen only when "write_valid_i" is asserted for that corresponding port
 
     always_ff @(posedge clk_i or negedge rst_ni) begin
         if (!rst_ni) begin
-            for (int k = 1; k < PHYS_REGS; k++) begin
+            for (int k = 0; k < PHYS_REGS; k++) begin
                 phys_reg_q[k]               <= 0;
             end
         end else begin
@@ -58,6 +66,8 @@ module aether_phys_regfile (
             end
         end
     end
+
+    // multiple writes to the same nonzero register asserts "duplicate_write_error_o"  signal
 
     always_comb begin
         duplicate_write_error_o = 0;
