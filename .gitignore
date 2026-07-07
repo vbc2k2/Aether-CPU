@@ -1,0 +1,7 @@
+.xsim/
+obj_dir/
+*.jou
+*.log
+*.wdb
+*.vcd
+*.fst
