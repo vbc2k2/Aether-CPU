@@ -1,5 +1,5 @@
-// `include "../../common/aether_pkg.sv"
-// import aether_pkg::*;
+`include "../../common/aether_pkg.sv"
+import aether_pkg::*;
 
 //------------------
 //  REGFILE
