@@ -12,6 +12,7 @@
   parameter FREE_REGS     = PHYS_REGS - ARCH_REGS;
   parameter FREE_IDX_BITS = $clog2(FREE_REGS)    ;
 
-  parameter RENAME_WIDTH = 1;
+  parameter RENAME_WIDTH  = 1                    ;
+  parameter COMMIT_WIDTH  = 1                    ;
 
   endpackage

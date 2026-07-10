@@ -7,14 +7,14 @@ import aether_pkg::*;
 
 module aether_free_list (
 
-    input  logic                     clk_i                         ,
-    input  logic                     rst_ni                        ,
-    input  logic                     alloc_req_i  [WRITE_PORTS-1:0],
-    output logic                     alloc_ready_o[WRITE_PORTS-1:0],
-    output logic [PHYS_REG_BITS-1:0] alloc_prd_o  [WRITE_PORTS-1:0],
+    input  logic                     clk_i                          ,
+    input  logic                     rst_ni                         ,
+    input  logic                     alloc_req_i  [RENAME_WIDTH-1:0],
+    output logic                     alloc_ready_o[RENAME_WIDTH-1:0],
+    output logic [PHYS_REG_BITS-1:0] alloc_prd_o  [RENAME_WIDTH-1:0],
 
-    input  logic                     free_valid_i [WRITE_PORTS-1:0],
-    input  logic [PHYS_REG_BITS-1:0] free_prd_i   [WRITE_PORTS-1:0]
+    input  logic                     free_valid_i [COMMIT_WIDTH-1:0],
+    input  logic [PHYS_REG_BITS-1:0] free_prd_i   [COMMIT_WIDTH-1:0]
 
     );
 
@@ -31,13 +31,15 @@ module aether_free_list (
     always_comb begin
         free_list_next = free_list_array;
         
-        for (int i = 0; i < WRITE_PORTS; i++) begin
+        // free prd at commit
+        for (int i = 0; i < COMMIT_WIDTH; i++) begin
             if (free_valid_i[i] && (free_prd_i[i] != 0)) begin
                 free_list_next[free_prd_i[i]] = 0;
             end
         end
 
-        for (int i = 0; i < WRITE_PORTS; i++) begin
+        // allocate prd at rename
+        for (int i = 0; i < RENAME_WIDTH; i++) begin
             alloc_prd_o[i]   = 0;
             alloc_ready_o[i] = 0;
             

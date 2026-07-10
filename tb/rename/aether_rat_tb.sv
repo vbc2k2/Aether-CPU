@@ -58,10 +58,7 @@ module aether_rat_tb;
     endtask
 
     task automatic check_preg(
-        input string name,
-        input logic [PHYS_REG_BITS-1:0] actual,
-        input logic [PHYS_REG_BITS-1:0] expected
-    );
+    input string name, input logic [PHYS_REG_BITS-1:0] actual, input logic [PHYS_REG_BITS-1:0] expected;
         if (actual !== expected) begin
             $display("ERROR: %s expected=p%0d actual=p%0d", name, expected, actual);
             error_count++;

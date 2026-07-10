@@ -2,22 +2,22 @@
 import aether_pkg::*;
 
 module aether_rat (
-    input  logic                     clk_i                              ,
-    input  logic                     rst_ni                             ,
-    input  logic [ARCH_REG_BITS-1:0] rs1_arch_i [RENAME_WIDTH-1:0]      ,
-    input  logic [ARCH_REG_BITS-1:0] rs2_arch_i [RENAME_WIDTH-1:0]      ,
-    input  logic [ARCH_REG_BITS-1:0] rd_arch_i  [RENAME_WIDTH-1:0]      ,
+    input  logic                     clk_i                                ,
+    input  logic                     rst_ni                               ,
+    input  logic [ARCH_REG_BITS-1:0] rs1_arch_i         [RENAME_WIDTH-1:0],
+    input  logic [ARCH_REG_BITS-1:0] rs2_arch_i         [RENAME_WIDTH-1:0],
+    input  logic [ARCH_REG_BITS-1:0] rd_arch_i          [RENAME_WIDTH-1:0],
 
-    output logic [PHYS_REG_BITS-1:0] prs1_o     [RENAME_WIDTH-1:0]      ,
-    output logic [PHYS_REG_BITS-1:0] prs2_o     [RENAME_WIDTH-1:0]      ,
-    output logic [PHYS_REG_BITS-1:0] old_prd_o  [RENAME_WIDTH-1:0]      ,
+    output logic [PHYS_REG_BITS-1:0] prs1_o             [RENAME_WIDTH-1:0],
+    output logic [PHYS_REG_BITS-1:0] prs2_o             [RENAME_WIDTH-1:0],
+    output logic [PHYS_REG_BITS-1:0] old_prd_o          [RENAME_WIDTH-1:0],
 
-    input  logic [PHYS_REG_BITS-1:0] new_prd_i  [RENAME_WIDTH-1:0]      ,
-    input  logic                     rename_valid_i  [RENAME_WIDTH-1:0] ,
+    input  logic [PHYS_REG_BITS-1:0] new_prd_i          [RENAME_WIDTH-1:0],
+    input  logic                     rename_valid_i     [RENAME_WIDTH-1:0],
 
-    input  logic                     commit_valid_i [RENAME_WIDTH-1:0]  ,
-    input  logic [ARCH_REG_BITS-1:0] commit_arch_rd_i [RENAME_WIDTH-1:0],
-    input  logic [PHYS_REG_BITS-1:0] commit_prd_i [RENAME_WIDTH-1:0]    ,
+    input  logic                     commit_valid_i     [RENAME_WIDTH-1:0],
+    input  logic [ARCH_REG_BITS-1:0] commit_arch_rd_i   [RENAME_WIDTH-1:0],
+    input  logic [PHYS_REG_BITS-1:0] commit_prd_i       [RENAME_WIDTH-1:0],
     input  logic                     restore_valid_i
 
 
